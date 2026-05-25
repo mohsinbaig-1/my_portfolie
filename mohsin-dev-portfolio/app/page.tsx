@@ -6,7 +6,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-950/20 via-black to-black">
-        {/* Subtle background glow effect */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative group">
@@ -57,7 +56,6 @@ export default function Home() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-
           {/* Project Card 1 */}
           <div className="bg-zinc-900/30 rounded-xl overflow-hidden border border-zinc-800/80 hover:border-blue-500/40 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:-translate-y-2 transition-all duration-300 group">
             <div className="overflow-hidden h-48 relative">
@@ -108,21 +106,19 @@ export default function Home() {
               <p className="text-gray-400 text-sm leading-relaxed">Immersive level design layout utilizing lumen dynamic lighting configurations inside Unreal Engine.</p>
             </div>
           </div>
-
         </div>
       </section>
 
-     {/* Contact Section */}
+      {/* Contact Section */}
       <section className="py-24 px-6 text-center bg-zinc-950 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="max-w-2xl mx-auto relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">LET'S BUILD SOMETHING IMMERSIVE</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">{"LET'S BUILD SOMETHING IMMERSIVE"}</h2>
           <p className="text-gray-400 mb-8 text-sm md:text-base leading-relaxed">
             Currently scouting for game development opportunities, freelance pipelines, or technical 3D collaborations.
           </p>
 
-          {/* Interactive Contact Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-xl mx-auto text-sm text-left">
             <div className="bg-zinc-900/40 p-4 rounded-xl border border-zinc-800/80 hover:border-blue-500/30 transition-colors backdrop-blur-sm">
               <span className="block text-xs text-blue-400 uppercase tracking-widest font-semibold mb-1">Email</span>
