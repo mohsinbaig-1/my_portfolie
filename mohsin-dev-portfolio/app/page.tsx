@@ -112,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
+     {/* Contact Section */}
       <section className="py-24 px-6 text-center bg-zinc-950 relative overflow-hidden">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-64 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         
@@ -121,9 +121,35 @@ export default function Home() {
           <p className="text-gray-400 mb-8 text-sm md:text-base leading-relaxed">
             Currently scouting for game development opportunities, freelance pipelines, or technical 3D collaborations.
           </p>
+
+          {/* Interactive Contact Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-xl mx-auto text-sm text-left">
+            <div className="bg-zinc-900/40 p-4 rounded-xl border border-zinc-800/80 hover:border-blue-500/30 transition-colors backdrop-blur-sm">
+              <span className="block text-xs text-blue-400 uppercase tracking-widest font-semibold mb-1">Email</span>
+              <a href="mailto:mohsinbaigi50@gmail.com" className="text-gray-300 hover:text-white transition-colors break-all font-medium">
+                mohsinbaigi50@gmail.com
+              </a>
+            </div>
+            
+            <div className="bg-zinc-900/40 p-4 rounded-xl border border-zinc-800/80 hover:border-blue-500/30 transition-colors backdrop-blur-sm">
+              <span className="block text-xs text-blue-400 uppercase tracking-widest font-semibold mb-1">Phone</span>
+              <a href="tel:03097287965" className="text-gray-300 hover:text-white transition-colors font-medium">
+                03097287965
+              </a>
+            </div>
+            
+            <div className="bg-zinc-900/40 p-4 rounded-xl border border-zinc-800/80 hover:border-blue-500/30 transition-colors backdrop-blur-sm flex flex-col justify-between">
+              <div>
+                <span className="block text-xs text-blue-400 uppercase tracking-widest font-semibold mb-1">Location</span>
+                <span className="text-gray-300 font-medium">
+                  Sahiwal, Punjab, Pakistan
+                </span>
+              </div>
+            </div>
+          </div>
           
           <a 
-            href="mailto:your.email@example.com" 
+            href="mailto:mohsinbaigi50@gmail.com" 
             className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3.5 px-8 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-0.5 mb-12"
           >
             Initiate Contact
@@ -140,7 +166,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
     </main>
   );
 }
