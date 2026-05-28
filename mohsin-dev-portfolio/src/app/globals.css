@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050816;
+  --foreground: #f1f5f9;
+  --card: rgba(255, 255, 255, 0.05);
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a855f7;
+}
+
+.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: rgba(15, 23, 42, 0.04);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.light body {
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.light .glass-text {
+  color: #0f172a;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #fff;
+}
+
+.light ::selection {
+  background: rgba(59, 130, 246, 0.25);
+  color: #0f172a;
+}
+
+/* Light mode overrides for glass components */
+.light [class*="border-white"] {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.light .text-gray-400 {
+  color: #64748b;
+}
+
+.light .text-gray-300 {
+  color: #475569;
+}
+
+.light .text-white {
+  color: #0f172a;
+}
+
+.light .bg-\[\#050816\] {
+  background: #f8fafc;
+}
+
+.light header {
+  background: rgba(248, 250, 252, 0.9) !important;
+}

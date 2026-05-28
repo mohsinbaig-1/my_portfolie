@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <rect width="800" height="480" fill="#0c1222"/>
+  <rect x="220" y="90" width="360" height="300" rx="12" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+  <path d="M260 150 H540 M260 200 H480 M260 250 H520 M260 300 H400" stroke="#64748b" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="520" cy="320" r="40" fill="#22d3ee" opacity="0.3"/>
+  <path d="M500 320 L515 335 L545 305" stroke="#22d3ee" stroke-width="6" fill="none"/>
+  <text x="400" y="430" text-anchor="middle" fill="#c4b5fd" font-family="system-ui,sans-serif" font-size="24" font-weight="700">Assignment Portal</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c1929"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="400" y1="100" x2="400" y2="380" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22d3ee" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg)"/>
+  <ellipse cx="400" cy="280" rx="280" ry="80" fill="url(#glow)"/>
+  <path d="M120 260 L400 200 L680 260 L620 280 L400 240 L180 280 Z" fill="#334155" stroke="#22d3ee" stroke-width="2"/>
+  <path d="M400 200 L400 120 L420 200 Z" fill="#64748b"/>
+  <text x="400" y="400" text-anchor="middle" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="28" font-weight="700">F18 Jet Simulation</text>
+  <text x="400" y="430" text-anchor="middle" fill="#22d3ee" font-family="system-ui,sans-serif" font-size="16">Unreal Engine 5</text>
+</svg>

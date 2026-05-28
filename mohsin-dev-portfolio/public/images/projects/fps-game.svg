@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="url(#bg2)"/>
+  <rect x="280" y="80" width="240" height="160" rx="8" stroke="#22d3ee" stroke-width="3" fill="none" opacity="0.6"/>
+  <line x1="400" y1="160" x2="520" y2="120" stroke="#ef4444" stroke-width="4"/>
+  <circle cx="520" cy="120" r="8" fill="#ef4444"/>
+  <rect x="200" y="300" width="400" height="20" rx="4" fill="#1e293b"/>
+  <text x="400" y="400" text-anchor="middle" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="28" font-weight="700">FPS Game UE5</text>
+  <text x="400" y="430" text-anchor="middle" fill="#a855f7" font-family="system-ui,sans-serif" font-size="16">Weapons · AI · Gameplay</text>
+</svg>

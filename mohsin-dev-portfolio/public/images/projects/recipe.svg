@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" fill="none">
+  <rect width="800" height="480" fill="#052e16"/>
+  <rect x="300" y="60" width="200" height="360" rx="24" fill="#14532d" stroke="#34d399" stroke-width="3"/>
+  <rect x="320" y="100" width="160" height="100" rx="12" fill="#22c55e" opacity="0.5"/>
+  <circle cx="400" cy="280" r="24" fill="#fbbf24"/>
+  <text x="400" y="400" text-anchor="middle" fill="#a7f3d0" font-family="system-ui,sans-serif" font-size="26" font-weight="700">Recipe App</text>
+  <text x="400" y="430" text-anchor="middle" fill="#34d399" font-family="system-ui,sans-serif" font-size="16">Flutter · Firebase</text>
+</svg>
