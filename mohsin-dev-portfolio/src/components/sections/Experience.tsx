@@ -51,7 +51,7 @@ export function Experience() {
                     {item.period}
                   </span>
                   <h3 className="mt-2 text-xl font-bold text-white">{item.title}</h3>
-                  <p className="text-sm font-medium text-purple-300">{item.organization}</p>
+                  <p className="text-sm font-medium text-purple-300">{item.subtitle}</p>
                   <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.description}</p>
                   <ul className="mt-4 space-y-2">
                     {item.highlights.map((highlight) => (

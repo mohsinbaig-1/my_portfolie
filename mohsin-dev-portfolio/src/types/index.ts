@@ -3,45 +3,63 @@ export type NavLink = {
   href: string;
 };
 
-export type Skill = {
+export type SkillTag = {
   name: string;
-  level: number;
+  note?: string;
 };
 
 export type SkillCategory = {
   id: string;
   title: string;
   icon: string;
-  skills: Skill[];
+  skills: SkillTag[];
+};
+
+export type ProjectMedia = {
+  type: "image" | "gif" | "video";
+  src: string;
+  alt: string;
+  caption?: string;
 };
 
 export type Project = {
   id: string;
   title: string;
+  tagline: string;
   description: string;
   image: string;
   techStack: string[];
   features: string[];
+  technicalBreakdown: string[];
+  challenges: string[];
+  architecture: string[];
+  role: string;
+  timeline: string;
+  lessonsLearned: string[];
+  futureRoadmap?: string[];
   githubUrl?: string;
   liveUrl?: string;
   category: "game" | "web" | "mobile";
+  featured?: boolean;
+  media?: ProjectMedia[];
 };
 
 export type TimelineItem = {
   id: string;
   period: string;
   title: string;
-  organization: string;
+  subtitle: string;
   description: string;
   highlights: string[];
 };
 
-export type Certification = {
+export type ShowcaseItem = {
   id: string;
   title: string;
-  issuer: string;
-  year: string;
-  credentialUrl?: string;
+  type: "video" | "gif" | "image";
+  src: string;
+  thumbnail?: string;
+  projectId: string;
 };
 
 export type GitHubRepo = {
@@ -50,9 +68,27 @@ export type GitHubRepo = {
   description: string | null;
   html_url: string;
   stargazers_count: number;
+  forks_count: number;
   language: string | null;
   fork: boolean;
   updated_at: string;
+  topics?: string[];
+  pushed_at?: string;
+};
+
+export type GitHubProfile = {
+  public_repos: number;
+  followers: number;
+  following: number;
+  created_at: string;
+};
+
+export type GitHubStats = {
+  profile: GitHubProfile | null;
+  repos: GitHubRepo[];
+  languages: { name: string; count: number; color: string }[];
+  totalStars: number;
+  recentActivity: number;
 };
 
 export type ContactFormData = {
@@ -60,4 +96,10 @@ export type ContactFormData = {
   email: string;
   subject: string;
   message: string;
+};
+
+export type BuildingPlan = {
+  title: string;
+  description: string;
+  status: "active" | "planned";
 };

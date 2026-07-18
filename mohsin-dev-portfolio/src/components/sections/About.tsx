@@ -1,84 +1,86 @@
 "use client";
 
-import { GlassCard } from "@/components/ui/GlassCard";
+import { AnimatedBorder } from "@/components/effects/AnimatedBorder";
+import { RevealText } from "@/components/effects/RevealText";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { educationFocus, siteConfig } from "@/data/site";
-import { Gamepad2, GraduationCap, Target } from "lucide-react";
+import { siteConfig } from "@/data/site";
+import { motion } from "framer-motion";
+import { FaBrain, FaCrosshairs, FaGamepad, FaRocket } from "react-icons/fa6";
+
+const focusIcons = [FaGamepad, FaBrain, FaCrosshairs, FaRocket];
 
 export function About() {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8" aria-labelledby="about-heading">
-      <div className="mx-auto max-w-7xl">
+    <section id="about" className="relative py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="about-heading">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(168,85,247,0.08),transparent_50%)]" />
+
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="About Me"
-          title="Engineering Meets Game Development"
-          description="Software engineering student building internship-ready UE5 projects."
+          eyebrow="About"
+          title="Gameplay Systems Engineer"
+          description="Building combat, AI, and simulation with production-minded architecture."
         />
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <GlassCard>
-            <p className="leading-relaxed text-gray-300">{siteConfig.summary}</p>
-            <p className="mt-4 leading-relaxed text-gray-400">{siteConfig.whyUE5}</p>
-            <p className="mt-4 font-medium text-cyan-300">{siteConfig.careerGoal}</p>
-          </GlassCard>
+        <div className="grid gap-8 lg:grid-cols-5">
+          <AnimatedBorder className="lg:col-span-3">
+            <div className="p-8 md:p-10">
+              <RevealText
+                as="p"
+                text={siteConfig.summary}
+                className="text-lg leading-relaxed text-gray-300"
+              />
+              <RevealText
+                as="p"
+                text={siteConfig.story}
+                delay={0.15}
+                className="mt-6 leading-relaxed text-gray-400"
+              />
+              <RevealText
+                as="p"
+                text={siteConfig.careerGoal}
+                delay={0.3}
+                className="mt-6 border-l-2 border-cyan-400/50 pl-4 font-medium text-cyan-300"
+              />
+            </div>
+          </AnimatedBorder>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-            <GlassCard delay={0.1}>
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-cyan-500/15 p-3">
-                  <GraduationCap className="h-6 w-6 text-cyan-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white">Education</h3>
-                  <p className="mt-1 text-sm text-gray-400">{siteConfig.university}</p>
-                  <p className="text-sm text-gray-300">
-                    {siteConfig.degree} · {siteConfig.semester}
-                  </p>
-                  <p className="mt-1 text-sm text-cyan-400">CGPA: {siteConfig.cgpa}</p>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {educationFocus.map((item) => (
-                      <li
-                        key={item}
-                        className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-gray-300"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </GlassCard>
-
-            <GlassCard delay={0.2}>
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-purple-500/15 p-3">
-                  <Gamepad2 className="h-6 w-6 text-purple-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white">Game Dev Focus</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-400">
-                    Passionate about Unreal Engine 5, FPS mechanics, and physics-based simulation—especially
-                    vehicle and aircraft systems like my F18 jet project.
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
-
-            <GlassCard delay={0.3} className="sm:col-span-2 lg:col-span-1">
-              <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-blue-500/15 p-3">
-                  <Target className="h-6 w-6 text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white">Career Goal</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-400">
-                    Become a professional Game Developer specializing in Unreal Engine 5—shipping gameplay
-                    systems, simulation experiences, and polished prototypes for studio teams.
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-1">
+            {siteConfig.focusAreas.slice(0, 4).map((area, i) => {
+              const Icon = focusIcons[i] ?? FaGamepad;
+              return (
+                <motion.div
+                  key={area}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-card group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-5 w-5 text-cyan-400" />
+                    </div>
+                    <span className="font-semibold text-white">{area}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2">
+          {siteConfig.focusAreas.map((area, i) => (
+            <motion.span
+              key={area}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.03 }}
+              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-gray-300 backdrop-blur-sm transition-colors hover:border-cyan-400/30 hover:text-cyan-300"
+            >
+              {area}
+            </motion.span>
+          ))}
         </div>
       </div>
     </section>

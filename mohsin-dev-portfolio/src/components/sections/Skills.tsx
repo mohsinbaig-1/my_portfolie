@@ -1,50 +1,74 @@
 "use client";
 
-import { GlassCard } from "@/components/ui/GlassCard";
+import { AnimatedBorder } from "@/components/effects/AnimatedBorder";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SkillBar } from "@/components/ui/SkillBar";
 import { skillCategories } from "@/data/skills";
-import { Code2, Cpu, Gamepad2, Wrench } from "lucide-react";
+import { motion } from "framer-motion";
+import { FaCode, FaGamepad, FaWrench } from "react-icons/fa6";
 
 const iconMap = {
-  gamepad: Gamepad2,
-  code: Code2,
-  cpu: Cpu,
-  wrench: Wrench,
+  gamepad: FaGamepad,
+  code: FaCode,
+  wrench: FaWrench,
 };
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-white/[0.02]" aria-labelledby="skills-heading">
-      <div className="mx-auto max-w-7xl">
+    <section
+      id="skills"
+      className="relative py-28 px-4 sm:px-6 lg:px-8"
+      aria-labelledby="skills-heading"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-white/[0.02]" />
+
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Skills"
           title="Technical Arsenal"
-          description="Animated proficiency across game development, programming, and engineering fundamentals."
+          description="Categorized expertise across gameplay systems, programming, and production tools."
         />
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-3">
           {skillCategories.map((category, catIndex) => {
-            const Icon = iconMap[category.icon as keyof typeof iconMap] ?? Code2;
+            const Icon = iconMap[category.icon as keyof typeof iconMap] ?? FaCode;
             return (
-              <GlassCard key={category.id} delay={catIndex * 0.1}>
-                <div className="mb-6 flex items-center gap-3">
-                  <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3">
-                    <Icon className="h-6 w-6 text-cyan-400" />
+              <AnimatedBorder key={category.id}>
+                <motion.div
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: catIndex * 0.1 }}
+                  className="p-6 md:p-8"
+                >
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3">
+                      <Icon className="h-6 w-6 text-cyan-400" />
+                    </div>
+                    <h3 className="text-lg font-bold text-white">{category.title}</h3>
                   </div>
-                  <h3 className="text-lg font-bold text-white">{category.title}</h3>
-                </div>
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <SkillBar
-                      key={skill.name}
-                      name={skill.name}
-                      level={skill.level}
-                      delay={catIndex * 0.1 + skillIndex * 0.05}
-                    />
-                  ))}
-                </div>
-              </GlassCard>
+
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.span
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: catIndex * 0.05 + skillIndex * 0.02 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        className="group inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-300 transition-all duration-300 hover:border-cyan-400/40 hover:bg-cyan-500/10 hover:text-cyan-200 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+                      >
+                        {skill.name}
+                        {skill.note && (
+                          <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-purple-300">
+                            {skill.note}
+                          </span>
+                        )}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatedBorder>
             );
           })}
         </div>

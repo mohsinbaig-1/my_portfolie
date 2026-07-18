@@ -28,11 +28,11 @@ export function SectionHeading({
       className={cn("mb-12 text-center md:mb-16", className)}
     >
       {eyebrow && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-400">
+        <p className="mb-3 font-[family-name:var(--font-orbitron)] text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
           {eyebrow}
         </p>
       )}
-      <h2 className="bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl lg:text-5xl">
+      <h2 className="font-[family-name:var(--font-orbitron)] bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl lg:text-5xl">
         {title}
       </h2>
       {description && (

@@ -1,12 +1,14 @@
 import { About } from "@/components/sections/About";
-import { Certifications } from "@/components/sections/Certifications";
 import { Contact } from "@/components/sections/Contact";
-import { Experience } from "@/components/sections/Experience";
+import { CurrentlyBuilding } from "@/components/sections/CurrentlyBuilding";
+import { FeaturedProject } from "@/components/sections/FeaturedProject";
+import { GameplayShowcase } from "@/components/sections/GameplayShowcase";
 import { GitHubRepos } from "@/components/sections/GitHubRepos";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
-import { Resume } from "@/components/sections/Resume";
 import { Skills } from "@/components/sections/Skills";
+import { Timeline } from "@/components/sections/Timeline";
+import { WhyUnreal } from "@/components/sections/WhyUnreal";
 
 export default function Home() {
   return (
@@ -14,11 +16,13 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
+      <FeaturedProject />
       <Projects />
-      <Experience />
-      <Certifications />
+      <GameplayShowcase />
+      <Timeline />
+      <CurrentlyBuilding />
+      <WhyUnreal />
       <GitHubRepos />
-      <Resume />
       <Contact />
     </>
   );

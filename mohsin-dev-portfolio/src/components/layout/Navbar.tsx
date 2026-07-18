@@ -3,19 +3,14 @@
 import { navLinks, siteConfig } from "@/data/site";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { cn, scrollToSection } from "@/lib/utils";
-import { Menu, Moon, Sun, X } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function Navbar() {
   const activeSection = useActiveSection();
-  const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -30,14 +25,12 @@ export function Navbar() {
     setMobileOpen(false);
   };
 
-  const isDark = !mounted || resolvedTheme === "dark";
-
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-white/10 bg-[#050816]/80 py-3 backdrop-blur-xl shadow-lg"
+          ? "border-b border-white/10 bg-[#050816]/85 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.3)] backdrop-blur-2xl"
           : "bg-transparent py-5",
       )}
     >
@@ -51,12 +44,14 @@ export function Navbar() {
             e.preventDefault();
             handleNavClick("#home");
           }}
-          className="text-lg font-bold tracking-tight"
+          className="group flex items-center gap-2"
         >
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 text-sm font-black text-cyan-400 transition-all group-hover:border-cyan-400/60 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]">
             MB
           </span>
-          <span className="ml-2 hidden text-white sm:inline">{siteConfig.name}</span>
+          <span className="hidden font-bold tracking-tight text-white sm:inline">
+            {siteConfig.name}
+          </span>
         </a>
 
         <ul className="hidden items-center gap-1 lg:flex">
@@ -72,42 +67,34 @@ export function Navbar() {
                     handleNavClick(link.href);
                   }}
                   className={cn(
-                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-cyan-500/15 text-cyan-300"
-                      : "text-gray-400 hover:text-white",
+                    "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    isActive ? "text-cyan-300" : "text-gray-400 hover:text-white",
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-0 rounded-lg bg-cyan-500/10 border border-cyan-400/20"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative">{link.label}</span>
                 </a>
               </li>
             );
           })}
         </ul>
 
-        <div className="flex items-center gap-2">
-          {mounted && (
-            <button
-              type="button"
-              onClick={() => setTheme(isDark ? "light" : "dark")}
-              className="rounded-lg border border-white/10 p-2.5 text-gray-300 transition-colors hover:border-cyan-400/40 hover:text-cyan-400"
-              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
-          )}
-
-          <button
-            type="button"
-            className="rounded-lg border border-white/10 p-2.5 text-gray-300 lg:hidden"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-expanded={mobileOpen}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+        <button
+          type="button"
+          className="rounded-lg border border-white/10 p-2.5 text-gray-300 transition-colors hover:border-cyan-400/40 hover:text-cyan-400 lg:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </nav>
 
       <AnimatePresence>
@@ -116,7 +103,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-b border-white/10 bg-[#050816]/95 backdrop-blur-xl lg:hidden"
+            className="border-b border-white/10 bg-[#050816]/95 backdrop-blur-2xl lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => {

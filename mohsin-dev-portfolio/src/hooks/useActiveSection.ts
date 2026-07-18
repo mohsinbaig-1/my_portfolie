@@ -7,10 +7,11 @@ const SECTION_IDS = [
   "about",
   "skills",
   "projects",
-  "experience",
-  "certifications",
+  "showcase",
+  "timeline",
+  "building",
+  "why-unreal",
   "github",
-  "resume",
   "contact",
 ];
 

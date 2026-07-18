@@ -1,13 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { AnimatedBorder } from "@/components/effects/AnimatedBorder";
+import { MagneticButton } from "@/components/effects/MagneticButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/data/site";
 import type { ContactFormData } from "@/types";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { Code2, Link2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
+import { FaGithub, FaLinkedin, FaEnvelope, FaFilePdf } from "react-icons/fa6";
 
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 
@@ -44,14 +45,31 @@ export function Contact() {
     if (Object.keys(validationErrors).length > 0) return;
 
     setStatus("loading");
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
 
-      if (!response.ok) throw new Error("Failed to send");
+    const { serviceId, templateId, publicKey } = siteConfig.emailjs;
+
+    try {
+      if (serviceId && templateId && publicKey) {
+        await emailjs.send(
+          serviceId,
+          templateId,
+          {
+            from_name: form.name,
+            from_email: form.email,
+            subject: form.subject,
+            message: form.message,
+            to_email: siteConfig.email,
+          },
+          publicKey,
+        );
+      } else {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        });
+        if (!response.ok) throw new Error("Failed to send");
+      }
 
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
@@ -66,26 +84,29 @@ export function Contact() {
   };
 
   const inputClass =
-    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 focus:border-cyan-400/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/20";
+    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 transition-colors focus:border-cyan-400/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/20";
+
+  const contactLinks = [
+    { icon: FaEnvelope, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
+    { icon: FaGithub, label: "GitHub", value: siteConfig.githubUsername, href: siteConfig.github },
+    { icon: FaLinkedin, label: "LinkedIn", value: "LinkedIn Profile", href: siteConfig.linkedin },
+    { icon: FaFilePdf, label: "Resume", value: "Download PDF", href: siteConfig.resumePath },
+  ];
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-white/[0.02]" aria-labelledby="contact-heading">
-      <div className="mx-auto max-w-7xl">
+    <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="contact-heading">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(34,211,238,0.06),transparent_50%)]" />
+
+      <div className="relative mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Contact"
-          title="Let's Build Something Together"
-          description="Reach out for UE5 internships, game dev collaborations, or software engineering opportunities."
+          title="Let's Connect"
+          description="Open to gameplay programming roles, UE5 collaborations, and studio opportunities."
         />
 
         <div className="grid gap-8 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-2">
-            {[
-              { icon: Mail, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-              { icon: Phone, label: "Phone", value: siteConfig.phone, href: `tel:${siteConfig.phone}` },
-              { icon: MapPin, label: "Location", value: siteConfig.location },
-              { icon: Code2, label: "GitHub", value: "mohsinbaig-1", href: siteConfig.github },
-              { icon: Link2, label: "LinkedIn", value: "mr-mohsin", href: siteConfig.linkedin },
-            ].map((item, i) => (
+            {contactLinks.map((item, i) => (
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, x: -16 }}
@@ -93,86 +114,55 @@ export function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
               >
-                <GlassCard className="flex items-center gap-4 !p-4">
-                  <item.icon className="h-5 w-5 shrink-0 text-cyan-400" />
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-gray-500">{item.label}</p>
-                    {item.href ? (
-                      <a href={item.href} className="text-sm font-medium text-gray-200 hover:text-cyan-400" target={item.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer">
-                        {item.value}
-                      </a>
-                    ) : (
+                <AnimatedBorder>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    download={item.label === "Resume" ? true : undefined}
+                    className="flex items-center gap-4 p-5 transition-colors hover:bg-white/[0.02]"
+                  >
+                    <div className="rounded-xl bg-cyan-500/15 p-3">
+                      <item.icon className="h-5 w-5 text-cyan-400" />
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-gray-500">{item.label}</p>
                       <p className="text-sm font-medium text-gray-200">{item.value}</p>
-                    )}
-                  </div>
-                </GlassCard>
+                    </div>
+                  </a>
+                </AnimatedBorder>
               </motion.div>
             ))}
           </div>
 
-          <GlassCard className="lg:col-span-3">
-            <form onSubmit={handleSubmit} noValidate aria-label="Contact form">
+          <AnimatedBorder className="lg:col-span-3">
+            <form onSubmit={handleSubmit} noValidate aria-label="Contact form" className="p-6 md:p-8">
               <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-gray-300">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className={inputClass}
-                    aria-invalid={!!errors.name}
-                    aria-describedby={errors.name ? "name-error" : undefined}
-                  />
-                  {errors.name && (
-                    <p id="name-error" className="mt-1 text-xs text-red-400" role="alert">
-                      {errors.name}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-300">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className={inputClass}
-                    aria-invalid={!!errors.email}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                  />
-                  {errors.email && (
-                    <p id="email-error" className="mt-1 text-xs text-red-400" role="alert">
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
+                <FormField
+                  id="name"
+                  label="Name"
+                  value={form.name}
+                  onChange={(v) => setForm({ ...form, name: v })}
+                  error={errors.name}
+                />
+                <FormField
+                  id="email"
+                  label="Email"
+                  type="email"
+                  value={form.email}
+                  onChange={(v) => setForm({ ...form, email: v })}
+                  error={errors.email}
+                />
               </div>
 
               <div className="mt-4">
-                <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-gray-300">
-                  Subject
-                </label>
-                <input
+                <FormField
                   id="subject"
-                  name="subject"
-                  type="text"
+                  label="Subject"
                   value={form.subject}
-                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  className={inputClass}
-                  aria-invalid={!!errors.subject}
+                  onChange={(v) => setForm({ ...form, subject: v })}
+                  error={errors.subject}
                 />
-                {errors.subject && (
-                  <p className="mt-1 text-xs text-red-400" role="alert">
-                    {errors.subject}
-                  </p>
-                )}
               </div>
 
               <div className="mt-4">
@@ -195,20 +185,61 @@ export function Contact() {
                 )}
               </div>
 
-              <Button type="submit" className="mt-6 w-full sm:w-auto" disabled={status === "loading"}>
-                <Send className="h-4 w-4" />
+              <MagneticButton type="submit" className="mt-6" disabled={status === "loading"}>
+                <FaEnvelope className="h-4 w-4" />
                 {status === "loading" ? "Sending..." : "Send Message"}
-              </Button>
+              </MagneticButton>
 
               {status === "success" && (
                 <p className="mt-4 text-sm text-emerald-400" role="status">
-                  Message sent successfully. I will get back to you soon!
+                  Message sent successfully. I will get back to you soon.
                 </p>
               )}
             </form>
-          </GlassCard>
+          </AnimatedBorder>
         </div>
       </div>
     </section>
+  );
+}
+
+function FormField({
+  id,
+  label,
+  type = "text",
+  value,
+  onChange,
+  error,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (v: string) => void;
+  error?: string;
+}) {
+  const inputClass =
+    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-gray-500 transition-colors focus:border-cyan-400/50 focus:outline-none focus:ring-2 focus:ring-cyan-400/20";
+
+  return (
+    <div>
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-gray-300">
+        {label}
+      </label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={inputClass}
+        aria-invalid={!!error}
+      />
+      {error && (
+        <p className="mt-1 text-xs text-red-400" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

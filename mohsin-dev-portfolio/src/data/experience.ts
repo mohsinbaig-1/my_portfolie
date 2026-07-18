@@ -5,7 +5,7 @@ export const experienceTimeline: TimelineItem[] = [
     id: "academic",
     period: "2022 — Present",
     title: "BS Software Engineering",
-    organization: "COMSATS University Islamabad, Sahiwal Campus",
+    subtitle: "COMSATS University Islamabad, Sahiwal Campus",
     description:
       "5th semester student building a strong foundation in software engineering while specializing in game development coursework and personal UE5 projects.",
     highlights: [
@@ -18,7 +18,7 @@ export const experienceTimeline: TimelineItem[] = [
     id: "ue5-path",
     period: "2024 — Present",
     title: "Unreal Engine 5 Learning Path",
-    organization: "Self-Directed + Coursera",
+    subtitle: "Self-Directed + Coursera",
     description:
       "Structured learning in UE5 Blueprints, C++, gameplay frameworks, and simulation mechanics through courses and iterative project builds.",
     highlights: [
@@ -31,7 +31,7 @@ export const experienceTimeline: TimelineItem[] = [
     id: "projects",
     period: "2024 — Present",
     title: "Personal Game Projects",
-    organization: "Independent Development",
+    subtitle: "Independent Development",
     description:
       "Building portfolio-ready UE5 experiences including F18 jet simulation and FPS prototypes to demonstrate internship-ready gameplay skills.",
     highlights: [
