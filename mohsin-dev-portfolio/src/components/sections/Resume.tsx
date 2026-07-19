@@ -23,8 +23,8 @@ export function Resume() {
           <ul className="mx-auto mt-6 max-w-md space-y-2 text-left text-sm text-gray-300">
             <li>• Unreal Engine 5 · Blueprints · C++</li>
             <li>• F18 Simulation & FPS Game Projects</li>
-            <li>• {siteConfig.degree} · {siteConfig.university}</li>
-            <li>• CGPA {siteConfig.cgpa} · {siteConfig.semester}</li>
+           <li>• Gameplay Programming · Unreal Engine 5</li>
+           <li>• AI Systems · Combat Mechanics · C++</li>
           </ul>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button href={siteConfig.resumePath} download ariaLabel="Download resume PDF">

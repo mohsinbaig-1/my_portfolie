@@ -21,6 +21,7 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
   const empty: GitHubStats = {
     profile: null,
     repos: [],
+    pinnedRepos: [],
     languages: [],
     totalStars: 0,
     recentActivity: 0,
@@ -82,19 +83,20 @@ export async function fetchGitHubStats(): Promise<GitHubStats> {
     ).length;
 
     return {
-      profile: profile
-        ? {
-            public_repos: profile.public_repos,
-            followers: profile.followers,
-            following: profile.following,
-            created_at: profile.created_at,
-          }
-        : null,
-      repos,
-      languages,
-      totalStars,
-      recentActivity,
-    };
+  profile: profile
+    ? {
+        public_repos: profile.public_repos,
+        followers: profile.followers,
+        following: profile.following,
+        created_at: profile.created_at,
+      }
+    : null,
+  repos,
+  pinnedRepos: repos, // Temporary fix
+  languages,
+  totalStars,
+  recentActivity,
+};
   } catch {
     return empty;
   }
