@@ -22,6 +22,19 @@ export type ProjectMedia = {
   caption?: string;
 };
 
+export type SystemBreakdown = {
+  id: string;
+  title: string;
+  description: string;
+  highlights: string[];
+};
+
+export type BlueprintScreenshot = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 export type Project = {
   id: string;
   title: string;
@@ -38,10 +51,16 @@ export type Project = {
   lessonsLearned: string[];
   futureRoadmap?: string[];
   githubUrl?: string;
+  repoUrl?: string;
   liveUrl?: string;
+  demoUrl?: string;
+  videoUrl?: string;
   category: "game" | "web" | "mobile";
   featured?: boolean;
+  pinned?: boolean;
   media?: ProjectMedia[];
+  blueprintScreenshots?: BlueprintScreenshot[];
+  systemsBreakdown?: SystemBreakdown[];
 };
 
 export type TimelineItem = {
@@ -60,6 +79,7 @@ export type ShowcaseItem = {
   src: string;
   thumbnail?: string;
   projectId: string;
+  videoUrl?: string;
 };
 
 export type GitHubRepo = {
@@ -86,6 +106,7 @@ export type GitHubProfile = {
 export type GitHubStats = {
   profile: GitHubProfile | null;
   repos: GitHubRepo[];
+  pinnedRepos: GitHubRepo[];
   languages: { name: string; count: number; color: string }[];
   totalStars: number;
   recentActivity: number;
