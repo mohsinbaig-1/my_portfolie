@@ -14,8 +14,8 @@ export function Footer() {
             <h3 className="font-[family-name:var(--font-orbitron)] text-lg font-bold text-white">
               {siteConfig.name}
             </h3>
-            <p className="mt-2 text-sm text-gray-400">{siteConfig.title}</p>
-            <p className="mt-1 text-sm text-gray-500">{siteConfig.subtitle}</p>
+            <p className="mt-2 text-sm text-slate-400">{siteConfig.title}</p>
+            <p className="mt-1 text-sm text-slate-500">{siteConfig.subtitle}</p>
           </div>
 
           <div>
@@ -27,7 +27,7 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 transition-colors hover:text-cyan-400"
+                    className="text-slate-400 transition-colors hover:text-cyan-300"
                   >
                     {link.label}
                   </a>
@@ -45,7 +45,7 @@ export function Footer() {
                 href={siteConfig.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-white/10 p-3 text-gray-400 transition-all hover:border-cyan-400/40 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+                className="rounded-xl border border-white/10 p-3 text-slate-400 transition-all hover:border-cyan-400/30 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(34,211,238,0.12)]"
                 aria-label="GitHub profile"
               >
                 <FaGithub className="h-5 w-5" />
@@ -54,14 +54,14 @@ export function Footer() {
                 href={siteConfig.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl border border-white/10 p-3 text-gray-400 transition-all hover:border-cyan-400/40 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+                className="rounded-xl border border-white/10 p-3 text-slate-400 transition-all hover:border-cyan-400/30 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(34,211,238,0.12)]"
                 aria-label="LinkedIn profile"
               >
                 <FaLinkedin className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="rounded-xl border border-white/10 p-3 text-gray-400 transition-all hover:border-cyan-400/40 hover:text-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+                className="rounded-xl border border-white/10 p-3 text-slate-400 transition-all hover:border-cyan-400/30 hover:text-cyan-300 hover:shadow-[0_0_18px_rgba(34,211,238,0.12)]"
                 aria-label="Send email"
               >
                 <FaEnvelope className="h-5 w-5" />
@@ -70,7 +70,7 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-12 border-t border-white/5 pt-8 text-center text-sm text-gray-600">
+        <p className="mt-12 border-t border-white/5 pt-8 text-center text-sm text-slate-600">
           © {year} {siteConfig.name}. Gameplay Programmer · Unreal Engine 5 · Built with Next.js
         </p>
       </div>

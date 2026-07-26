@@ -11,8 +11,8 @@ const focusIcons = [FaGamepad, FaBrain, FaCrosshairs, FaRocket];
 
 export function About() {
   return (
-    <section id="about" className="relative py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="about-heading">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(168,85,247,0.08),transparent_50%)]" />
+    <section id="about" className="section-shell relative" aria-labelledby="about-heading">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.06),transparent_50%)]" />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading
@@ -54,10 +54,10 @@ export function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="glass-card group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-cyan-400/30 hover:shadow-[0_0_30px_rgba(34,211,238,0.1)]"
+                  className="glass-card group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl transition-all duration-300 hover:border-cyan-300/25 hover:shadow-[0_0_26px_rgba(34,211,238,0.08)]"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3 transition-transform duration-300 group-hover:scale-110">
+                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/18 to-sky-500/10 p-3 transition-transform duration-300 group-hover:scale-110">
                       <Icon className="h-5 w-5 text-cyan-400" />
                     </div>
                     <span className="font-semibold text-white">{area}</span>

@@ -8,6 +8,10 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import "./globals.css";
 
+const metadataBaseUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : new URL("http://localhost:3000");
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,6 +29,7 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
+  metadataBase: metadataBaseUrl,
   title: {
     default: `${siteConfig.name} | Gameplay Programmer · UE5 Developer`,
     template: `%s | ${siteConfig.name}`,
@@ -46,11 +51,36 @@ export const metadata: Metadata = {
     "Game Studio",
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.github }],
+  applicationName: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: `${siteConfig.name} | Gameplay Programmer Portfolio`,
     description: siteConfig.summary,
     type: "website",
     locale: "en_US",
+    url: "/",
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: "/images/projects/zombie-hunter.svg",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} portfolio preview`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} | Gameplay Programmer Portfolio`,
+    description: siteConfig.summary,
+    images: ["/images/projects/zombie-hunter.svg"],
+  },
+  icons: {
+    icon: "/window.svg",
+    shortcut: "/window.svg",
+    apple: "/window.svg",
   },
   robots: { index: true, follow: true },
 };

@@ -1,18 +1,30 @@
 "use client";
 
+import { motion } from "framer-motion";
+import gsap from "gsap";
 import { cn } from "@/lib/utils";
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import type { PointerEvent, ReactNode } from "react";
 
 type MagneticButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   onClick?: () => void;
   href?: string;
   download?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "ghost";
   ariaLabel?: string;
+  external?: boolean;
+};
+
+const variantClasses = {
+  primary:
+    "border border-cyan-400/20 bg-gradient-to-r from-cyan-500 via-sky-600 to-blue-700 text-white shadow-[0_10px_30px_rgba(8,145,178,0.18)]",
+  secondary:
+    "border border-white/15 bg-white/5 text-white backdrop-blur-md hover:border-cyan-400/35 hover:bg-white/[0.08]",
+  ghost: "border border-transparent bg-transparent text-gray-300 hover:text-cyan-200",
 };
 
 export function MagneticButton({
@@ -25,72 +37,139 @@ export function MagneticButton({
   disabled,
   variant = "primary",
   ariaLabel,
+  external,
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLButtonElement & HTMLAnchorElement>(null);
-  const [transform, setTransform] = useState("translate(0, 0)");
+  const elementRef = useRef<HTMLElement | null>(null);
+  const xTo = useRef<((value: number) => void) | null>(null);
+  const yTo = useRef<((value: number) => void) | null>(null);
+  const rotateTo = useRef<((value: number) => void) | null>(null);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const el = ref.current;
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return;
+
+    xTo.current = gsap.quickTo(element, "x", { duration: 0.35, ease: "power3.out" });
+    yTo.current = gsap.quickTo(element, "y", { duration: 0.35, ease: "power3.out" });
+    rotateTo.current = gsap.quickTo(element, "rotate", { duration: 0.35, ease: "power3.out" });
+
+    return () => {
+      xTo.current = null;
+      yTo.current = null;
+      rotateTo.current = null;
+    };
+  }, []);
+
+  const handlePointerMove = (e: PointerEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+    const el = elementRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    setTransform(`translate(${x * 0.15}px, ${y * 0.15}px)`);
+
+    xTo.current?.(x * 0.14);
+    yTo.current?.(y * 0.14);
+    rotateTo.current?.(x * 0.02);
+
+    el.style.setProperty("--pointer-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+    el.style.setProperty("--pointer-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
   };
 
-  const handleMouseLeave = () => setTransform("translate(0, 0)");
+  const handlePointerLeave = () => {
+    xTo.current?.(0);
+    yTo.current?.(0);
+    rotateTo.current?.(0);
+
+    const element = elementRef.current;
+    if (!element) return;
+    element.style.setProperty("--pointer-x", "50%");
+    element.style.setProperty("--pointer-y", "50%");
+  };
+
+  const setAnchorRef = (element: HTMLAnchorElement | null) => {
+    elementRef.current = element;
+  };
+
+  const setButtonRef = (element: HTMLButtonElement | null) => {
+    elementRef.current = element;
+  };
 
   const baseClass = cn(
-    "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-7 py-3.5 text-sm font-semibold transition-all duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]",
+    "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-7 py-3.5 text-sm font-semibold transition-[transform,box-shadow,background-color,border-color,color] duration-300 will-change-transform",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]",
     "disabled:pointer-events-none disabled:opacity-50",
-    variant === "primary"
-      ? "bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
-      : "border border-white/20 bg-white/5 text-white backdrop-blur-md hover:border-cyan-400/40 hover:bg-white/10",
+    variantClasses[variant],
     className,
   );
 
-  const style = { transform };
+  const overlay = (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      style={{
+        background:
+          "radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255,255,255,0.16), transparent 36%)",
+      }}
+    />
+  );
+
+  const sheen = (
+    <span
+      aria-hidden="true"
+      className="pointer-events-none absolute -inset-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      style={{
+        background:
+          "linear-gradient(115deg, transparent 15%, rgba(255,255,255,0.16) 35%, transparent 55%)",
+        transform: "translateX(-100%)",
+      }}
+    />
+  );
 
   const inner = (
     <>
+      {overlay}
+      {sheen}
       <span className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-white/10 to-purple-400/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_45%)] opacity-70" />
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </>
   );
 
   if (href) {
     return (
-      <a
-        ref={ref}
+      <motion.a
+        ref={setAnchorRef}
         href={href}
         download={download}
         aria-label={ariaLabel}
         className={cn(baseClass, "group magnetic-btn")}
-        style={style}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        onFocus={handlePointerLeave}
+        target={external || href.startsWith("http") ? "_blank" : undefined}
+        rel={external || href.startsWith("http") ? "noopener noreferrer" : undefined}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
       >
         {inner}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <button
-      ref={ref}
+    <motion.button
+      ref={setButtonRef}
       type={type}
       onClick={onClick}
       disabled={disabled}
       aria-label={ariaLabel}
       className={cn(baseClass, "group magnetic-btn")}
-      style={style}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      onFocus={handlePointerLeave}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
     >
       {inner}
-    </button>
+    </motion.button>
   );
 }

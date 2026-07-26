@@ -103,6 +103,34 @@ export type GitHubRepo = {
   pushed_at?: string;
 };
 
+export type GitHubContributionDay = {
+  date: string;
+  count: number;
+  weekday: number;
+  color: string;
+};
+
+export type GitHubContributionWeek = {
+  startDate: string;
+  days: GitHubContributionDay[];
+};
+
+export type GitHubContributionGraph = {
+  totalContributions: number;
+  maxCount: number;
+  weeks: GitHubContributionWeek[];
+};
+
+export type GitHubCommitActivity = {
+  commitsLast30Days: number;
+  pushEventsLast30Days: number;
+  activeDaysLast30Days: number;
+  currentStreak: number;
+  peakDayCount: number;
+  weeklyTotals: { label: string; count: number }[];
+  lastPushDate: string | null;
+};
+
 export type GitHubProfile = {
   public_repos: number;
   followers: number;
@@ -112,11 +140,13 @@ export type GitHubProfile = {
 
 export type GitHubStats = {
   profile: GitHubProfile | null;
-  repos: GitHubRepo[];
   pinnedRepos: GitHubRepo[];
+  latestRepos: GitHubRepo[];
+  repos: GitHubRepo[];
   languages: { name: string; count: number; color: string }[];
   totalStars: number;
-  recentActivity: number;
+  commitActivity: GitHubCommitActivity;
+  contributionGraph: GitHubContributionGraph;
 };
 
 export type ContactFormData = {

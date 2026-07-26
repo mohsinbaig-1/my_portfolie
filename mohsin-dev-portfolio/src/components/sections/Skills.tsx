@@ -16,10 +16,10 @@ export function Skills() {
   return (
     <section
       id="skills"
-      className="relative py-28 px-4 sm:px-6 lg:px-8"
+      className="section-shell relative"
       aria-labelledby="skills-heading"
     >
-      <div className="pointer-events-none absolute inset-0 bg-white/[0.02]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.05),transparent_55%)]" />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading
@@ -41,7 +41,7 @@ export function Skills() {
                   className="p-6 md:p-8"
                 >
                   <div className="mb-6 flex items-center gap-3">
-                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3">
+                    <div className="rounded-xl bg-gradient-to-br from-cyan-500/18 to-blue-500/10 p-3">
                       <Icon className="h-6 w-6 text-cyan-400" />
                     </div>
                     <h3 className="text-lg font-bold text-white">{category.title}</h3>
@@ -60,7 +60,7 @@ export function Skills() {
                       >
                         {skill.name}
                         {skill.note && (
-                          <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-purple-300">
+                          <span className="rounded bg-sky-500/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-sky-200">
                             {skill.note}
                           </span>
                         )}

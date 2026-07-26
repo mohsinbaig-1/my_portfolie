@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export function Timeline() {
   return (
-    <section id="timeline" className="py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="timeline-heading">
+    <section id="timeline" className="section-shell relative" aria-labelledby="timeline-heading">
       <div className="mx-auto max-w-4xl">
         <SectionHeading
           eyebrow="Journey"
@@ -15,7 +15,7 @@ export function Timeline() {
         />
 
         <div className="relative">
-          <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-cyan-400/50 via-purple-400/30 to-transparent md:left-1/2 md:-translate-x-px" />
+          <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-cyan-300/50 via-sky-300/25 to-transparent md:left-1/2 md:-translate-x-px" />
 
           {timelineItems.map((item, index) => {
             const isEven = index % 2 === 0;
@@ -41,7 +41,7 @@ export function Timeline() {
                       {item.period}
                     </span>
                     <h3 className="mt-2 text-xl font-bold text-white">{item.title}</h3>
-                    <p className="text-sm font-medium text-purple-300">{item.subtitle}</p>
+                    <p className="text-sm font-medium text-sky-200">{item.subtitle}</p>
                     <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.description}</p>
                     <ul className={`mt-4 space-y-1 ${isEven ? "md:text-right" : ""}`}>
                       {item.highlights.map((h) => (

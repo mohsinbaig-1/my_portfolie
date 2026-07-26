@@ -9,7 +9,7 @@ import { scrollToSection } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { FaDownload, FaEnvelope } from "react-icons/fa";
 import { HiOutlineCodeBracket } from "react-icons/hi2";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Scene3D = dynamic(
   () => import("@/components/effects/Scene3D").then((m) => m.Scene3D),
@@ -21,6 +21,9 @@ export function Hero() {
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLElement>(null);
+  const mouseTargetRef = useRef({ x: 0, y: 0 });
+  const mouseFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const currentRole = siteConfig.typingRoles[roleIndex];
@@ -50,15 +53,37 @@ export function Hero() {
     const handleMouse = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 2;
       const y = (e.clientY / window.innerHeight - 0.5) * 2;
-      setMouse({ x, y });
+
+      mouseTargetRef.current = { x, y };
+
+      const section = heroRef.current;
+      if (section) {
+        section.style.setProperty("--hero-mouse-x", `${50 + x * 10}%`);
+        section.style.setProperty("--hero-mouse-y", `${40 + y * 10}%`);
+      }
+
+      if (mouseFrameRef.current !== null) {
+        return;
+      }
+
+      mouseFrameRef.current = window.requestAnimationFrame(() => {
+        setMouse(mouseTargetRef.current);
+        mouseFrameRef.current = null;
+      });
     };
     window.addEventListener("mousemove", handleMouse, { passive: true });
-    return () => window.removeEventListener("mousemove", handleMouse);
+    return () => {
+      window.removeEventListener("mousemove", handleMouse);
+      if (mouseFrameRef.current !== null) {
+        window.cancelAnimationFrame(mouseFrameRef.current);
+      }
+    };
   }, []);
 
   return (
     <section
       id="home"
+      ref={heroRef}
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
       aria-labelledby="hero-heading"
     >
@@ -76,7 +101,8 @@ export function Hero() {
         <div
           className="absolute inset-0 opacity-30 transition-transform duration-700 ease-out"
           style={{
-            background: `radial-gradient(circle at ${50 + mouse.x * 10}% ${40 + mouse.y * 10}%, rgba(34,211,238,0.15) 0%, transparent 50%)`,
+            background:
+              "radial-gradient(circle at var(--hero-mouse-x, 50%) var(--hero-mouse-y, 40%), rgba(34,211,238,0.15) 0%, transparent 50%)",
           }}
         />
       </div>

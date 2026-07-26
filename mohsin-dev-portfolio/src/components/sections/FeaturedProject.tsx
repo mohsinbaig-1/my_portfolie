@@ -15,10 +15,10 @@ export function FeaturedProject() {
   return (
     <section
       id="featured"
-      className="relative py-28 px-4 sm:px-6 lg:px-8"
+      className="section-shell relative"
       aria-labelledby="featured-heading"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.06),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.05),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading

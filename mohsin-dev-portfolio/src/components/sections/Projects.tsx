@@ -14,7 +14,7 @@ const otherProjects = projects.filter((p) => !p.featured);
 
 export function Projects() {
   return (
-    <section id="projects" className="py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="projects-heading">
+    <section id="projects" className="section-shell relative" aria-labelledby="projects-heading">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Portfolio"
@@ -63,14 +63,14 @@ function ProjectDetailCard({ project, index }: { project: Project; index: number
           <h3 className="text-2xl font-bold text-white transition-colors group-hover:text-cyan-300">
             {project.title}
           </h3>
-          <p className="mt-1 text-sm font-medium text-purple-300">{project.tagline}</p>
-          <p className="mt-3 text-sm leading-relaxed text-gray-400">{project.description}</p>
+          <p className="mt-1 text-sm font-medium text-sky-200">{project.tagline}</p>
+          <p className="mt-3 text-sm leading-relaxed text-slate-400">{project.description}</p>
 
           <div className="mt-4 flex flex-wrap gap-2">
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-gray-300"
+                className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-slate-300"
               >
                 {tech}
               </span>
@@ -82,7 +82,7 @@ function ProjectDetailCard({ project, index }: { project: Project; index: number
               <button
                 type="button"
                 onClick={() => setExpanded(!expanded)}
-                className="mt-4 text-sm font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
+                className="mt-4 text-sm font-semibold text-cyan-300 transition-colors hover:text-cyan-200"
               >
                 {expanded ? "Hide Details ↑" : "Technical Details ↓"}
               </button>
@@ -98,7 +98,7 @@ function ProjectDetailCard({ project, index }: { project: Project; index: number
                   <MiniBlock title="Challenges" items={project.challenges} />
                   <MiniBlock title="Architecture" items={project.architecture} />
                   <MiniBlock title="Lessons Learned" items={project.lessonsLearned} />
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-slate-500">
                     {project.role} · {project.timeline}
                   </p>
                 </motion.div>

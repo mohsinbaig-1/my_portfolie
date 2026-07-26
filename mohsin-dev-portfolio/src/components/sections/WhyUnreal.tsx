@@ -10,7 +10,7 @@ const icons = [FaCode, FaBolt, FaRocket, FaLayerGroup];
 
 export function WhyUnreal() {
   return (
-    <section id="why-unreal" className="py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="why-unreal-heading">
+    <section id="why-unreal" className="section-shell relative" aria-labelledby="why-unreal-heading">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Engine Choice"
@@ -30,7 +30,7 @@ export function WhyUnreal() {
                   transition={{ delay: index * 0.1 }}
                   className="group p-6 md:p-8"
                 >
-                  <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 p-3 transition-transform duration-300 group-hover:scale-110">
+                  <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-cyan-500/18 to-blue-500/10 p-3 transition-transform duration-300 group-hover:scale-110">
                     <Icon className="h-6 w-6 text-cyan-400" />
                   </div>
                   <h3 className="text-lg font-bold text-white">{point.title}</h3>

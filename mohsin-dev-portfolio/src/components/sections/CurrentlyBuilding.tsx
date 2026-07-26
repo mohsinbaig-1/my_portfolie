@@ -10,10 +10,10 @@ export function CurrentlyBuilding() {
   return (
     <section
       id="building"
-      className="relative py-28 px-4 sm:px-6 lg:px-8"
+      className="section-shell relative"
       aria-labelledby="building-heading"
     >
-      <div className="pointer-events-none absolute inset-0 bg-white/[0.02]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(251,191,36,0.04),transparent_55%)]" />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading
@@ -58,8 +58,8 @@ export function CurrentlyBuilding() {
           <AnimatedBorder>
             <div className="p-8">
               <div className="mb-6 flex items-center gap-3">
-                <div className="rounded-xl bg-purple-500/15 p-3">
-                  <FaRoad className="h-5 w-5 text-purple-400" />
+                <div className="rounded-xl bg-amber-500/12 p-3">
+                  <FaRoad className="h-5 w-5 text-amber-300" />
                 </div>
                 <h3 className="text-xl font-bold text-white">Future Plans</h3>
               </div>
@@ -71,15 +71,15 @@ export function CurrentlyBuilding() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.06 }}
-                    className="rounded-xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-purple-400/30"
+                    className="rounded-xl border border-white/10 bg-white/5 p-4 transition-all duration-300 hover:border-amber-300/25"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <h4 className="font-semibold text-white">{plan.title}</h4>
                       <span
                         className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
                           plan.status === "active"
-                            ? "bg-cyan-500/20 text-cyan-300"
-                            : "bg-purple-500/20 text-purple-300"
+                            ? "bg-cyan-500/18 text-cyan-200"
+                              : "bg-amber-500/15 text-amber-200"
                         }`}
                       >
                         {plan.status}

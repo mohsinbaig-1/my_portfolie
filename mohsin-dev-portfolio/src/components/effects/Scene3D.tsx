@@ -43,12 +43,17 @@ function ParticleCloud() {
   const count = 120;
   const ref = useRef<THREE.Points>(null);
 
+  const seededRandom = (index: number, seed: number) => {
+    const value = Math.sin(index * 12.9898 + seed * 78.233) * 43758.5453;
+    return value - Math.floor(value);
+  };
+
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 20;
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
+      arr[i * 3] = (seededRandom(i, 1) - 0.5) * 20;
+      arr[i * 3 + 1] = (seededRandom(i, 2) - 0.5) * 12;
+      arr[i * 3 + 2] = (seededRandom(i, 3) - 0.5) * 10 - 5;
     }
     return arr;
   }, []);

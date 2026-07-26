@@ -2,11 +2,13 @@
 
 :root {
   --background: #050816;
-  --foreground: #f1f5f9;
-  --card: rgba(255, 255, 255, 0.05);
+  --background-soft: #081120;
+  --foreground: #ecf2f8;
+  --card: rgba(255, 255, 255, 0.045);
   --accent-cyan: #22d3ee;
-  --accent-purple: #a855f7;
   --accent-blue: #3b82f6;
+  --accent-amber: #fbbf24;
+  --surface-border: rgba(148, 163, 184, 0.16);
 }
 
 @theme inline {
@@ -22,14 +24,21 @@ html {
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 34%),
+    radial-gradient(circle at 85% 10%, rgba(251, 191, 36, 0.05), transparent 24%),
+    linear-gradient(180deg, #050816 0%, #04060e 100%);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
+  background: rgba(34, 211, 238, 0.24);
   color: #fff;
 }
 
@@ -37,13 +46,13 @@ body {
 .animated-border {
   background: linear-gradient(
     135deg,
-    rgba(34, 211, 238, 0.4),
-    rgba(168, 85, 247, 0.2),
-    rgba(59, 130, 246, 0.3),
-    rgba(34, 211, 238, 0.4)
+    rgba(34, 211, 238, 0.34),
+    rgba(59, 130, 246, 0.24),
+    rgba(251, 191, 36, 0.18),
+    rgba(34, 211, 238, 0.34)
   );
-  background-size: 300% 300%;
-  animation: gradient-shift 6s ease infinite;
+  background-size: 240% 240%;
+  animation: gradient-shift 10s ease infinite;
 }
 
 @keyframes gradient-shift {
@@ -64,7 +73,7 @@ body {
 
 /* Magnetic button glow */
 .magnetic-btn:hover {
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.18);
 }
 
 /* Scrollbar styling */
@@ -77,13 +86,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #22d3ee, #a855f7);
+  background: linear-gradient(180deg, #22d3ee, #3b82f6, #fbbf24);
   border-radius: 4px;
 }
 
 /* Text gradient utility */
 .text-gradient {
-  background: linear-gradient(135deg, #22d3ee, #a855f7, #3b82f6);
+  background: linear-gradient(135deg, #f8fafc, #7dd3fc, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -96,8 +105,31 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.015;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.section-shell {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 640px) {
+  .section-shell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
 }
 
 /* Reduced motion */

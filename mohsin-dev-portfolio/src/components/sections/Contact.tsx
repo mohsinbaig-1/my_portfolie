@@ -94,8 +94,8 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="relative py-28 px-4 sm:px-6 lg:px-8" aria-labelledby="contact-heading">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(34,211,238,0.06),transparent_50%)]" />
+    <section id="contact" className="section-shell relative" aria-labelledby="contact-heading">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(34,211,238,0.05),transparent_50%)]" />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading
@@ -122,12 +122,12 @@ export function Contact() {
                     download={item.label === "Resume" ? true : undefined}
                     className="flex items-center gap-4 p-5 transition-colors hover:bg-white/[0.02]"
                   >
-                    <div className="rounded-xl bg-cyan-500/15 p-3">
-                      <item.icon className="h-5 w-5 text-cyan-400" />
+                    <div className="rounded-xl bg-cyan-500/12 p-3">
+                      <item.icon className="h-5 w-5 text-cyan-300" />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-gray-500">{item.label}</p>
-                      <p className="text-sm font-medium text-gray-200">{item.value}</p>
+                      <p className="text-xs uppercase tracking-widest text-slate-500">{item.label}</p>
+                      <p className="text-sm font-medium text-slate-200">{item.value}</p>
                     </div>
                   </a>
                 </AnimatedBorder>
@@ -166,7 +166,7 @@ export function Contact() {
               </div>
 
               <div className="mt-4">
-                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-gray-300">
+                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-300">
                   Message
                 </label>
                 <textarea
