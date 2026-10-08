@@ -32,11 +32,11 @@ export function SectionHeading({
           transition: { staggerChildren: 0.08, delayChildren: 0.05 },
         },
       }}
-      className={cn("relative mb-12 text-center md:mb-16", className)}
+      className={cn("relative mb-10 text-left md:mb-14", className)}
     >
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-1/2 top-0 h-px w-44 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent"
+        className="pointer-events-none left-0 top-0 h-px w-28 bg-gradient-to-r from-amber-300/70 to-transparent"
         initial={{ opacity: 0, scaleX: 0.2 }}
         whileInView={{ opacity: 1, scaleX: 1 }}
         viewport={{ once: true }}
@@ -46,7 +46,7 @@ export function SectionHeading({
       {eyebrow && (
         <motion.p
           variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
-          className="mb-3 font-[family-name:var(--font-orbitron)] text-xs font-semibold uppercase tracking-[0.3em] text-cyan-300"
+          className="mb-3 font-[family-name:var(--font-orbitron)] text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200"
         >
           {eyebrow}
         </motion.p>
@@ -54,7 +54,7 @@ export function SectionHeading({
 
       <motion.h2
         variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-        className="font-[family-name:var(--font-orbitron)] bg-gradient-to-r from-white via-slate-100 to-cyan-100 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl lg:text-5xl"
+        className="max-w-3xl font-[family-name:var(--font-orbitron)] bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-4xl lg:text-5xl"
       >
         {title}
       </motion.h2>
@@ -62,7 +62,7 @@ export function SectionHeading({
       {description && (
         <motion.p
           variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
-          className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-400 md:text-lg"
+          className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400 md:text-lg"
         >
           {description}
         </motion.p>
@@ -74,7 +74,7 @@ export function SectionHeading({
         whileInView={{ opacity: 1, scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.65, delay: 0.15 }}
-        className="mx-auto mt-6 h-px w-24 origin-center bg-gradient-to-r from-transparent via-white/25 to-transparent"
+        className="mt-6 h-px w-24 origin-left bg-gradient-to-r from-amber-300/60 to-transparent"
       />
     </motion.div>
   );

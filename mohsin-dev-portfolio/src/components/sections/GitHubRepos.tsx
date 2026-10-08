@@ -93,8 +93,8 @@ export function GitHubRepos() {
           </AnimatedBorder>
         ) : null}
 
-        <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-6">
+        <div className="grid min-w-0 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+          <div className="min-w-0 space-y-6">
             <DashboardCard title="Pinned Repositories" subtitle="Curated from GitHub API data and portfolio relevance.">
               <AnimatePresence mode="wait">
                 {isLoading ? (
@@ -144,7 +144,7 @@ export function GitHubRepos() {
             </DashboardCard>
           </div>
 
-          <div className="space-y-6">
+          <div className="min-w-0 space-y-6">
             <DashboardCard title="Languages" subtitle="Most used languages across public repositories.">
               {isLoading ? (
                 <LanguageSkeleton />
@@ -216,7 +216,7 @@ export function GitHubRepos() {
                     <p>{stats?.contributionGraph.totalContributions ?? 0} contributions shown</p>
                   </div>
 
-                  <div className="overflow-x-auto rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="min-w-0 max-w-full overflow-x-auto rounded-2xl border border-white/10 bg-white/5 p-4">
                     <div className="grid min-w-[560px] grid-flow-col gap-1.5">
                       {stats?.contributionGraph.weeks.map((week) => (
                         <div key={week.startDate} className="grid grid-rows-7 gap-1.5">
@@ -275,7 +275,7 @@ function DashboardCard({
 }) {
   return (
     <AnimatedBorder>
-      <div className="p-6">
+      <div className="min-w-0 p-6">
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <p className={sectionLabelClass}>{title}</p>

@@ -21,10 +21,10 @@ type MagneticButtonProps = {
 
 const variantClasses = {
   primary:
-    "border border-cyan-400/20 bg-gradient-to-r from-cyan-500 via-sky-600 to-blue-700 text-white shadow-[0_10px_30px_rgba(8,145,178,0.18)]",
+    "border border-amber-200/30 bg-gradient-to-r from-amber-200 via-amber-300 to-orange-300 text-[#17130b] shadow-[0_10px_30px_rgba(247,200,115,0.16)]",
   secondary:
-    "border border-white/15 bg-white/5 text-white backdrop-blur-md hover:border-cyan-400/35 hover:bg-white/[0.08]",
-  ghost: "border border-transparent bg-transparent text-gray-300 hover:text-cyan-200",
+    "border border-white/15 bg-white/5 text-white backdrop-blur-md hover:border-amber-200/40 hover:bg-white/[0.08]",
+  ghost: "border border-transparent bg-transparent text-gray-300 hover:text-amber-100",
 };
 
 export function MagneticButton({
@@ -95,7 +95,7 @@ export function MagneticButton({
 
   const baseClass = cn(
     "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-7 py-3.5 text-sm font-semibold transition-[transform,box-shadow,background-color,border-color,color] duration-300 will-change-transform",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#08090b]",
     "disabled:pointer-events-none disabled:opacity-50",
     variantClasses[variant],
     className,

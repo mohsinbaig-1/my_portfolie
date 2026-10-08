@@ -107,12 +107,13 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-4 pt-32 pb-24 text-center">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-end gap-12 px-4 pt-32 pb-24 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
+        <div className="max-w-3xl text-left">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 px-5 py-2 text-xs font-medium uppercase tracking-widest text-cyan-300 backdrop-blur-md"
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-amber-100 backdrop-blur-md"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
@@ -126,9 +127,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl font-black tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+          className="text-5xl font-black leading-[0.96] tracking-tight sm:text-6xl md:text-7xl lg:text-[6.5rem]"
         >
-          <span className="bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]">
+          <span className="bg-gradient-to-r from-white via-slate-100 to-amber-100 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(247,200,115,0.16)]">
             {siteConfig.name}
           </span>
         </motion.h1>
@@ -137,7 +138,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
-          className="mt-4 text-xl font-semibold text-gray-200 md:text-2xl"
+          className="mt-6 text-xl font-semibold text-gray-200 md:text-2xl"
         >
           {siteConfig.title}
         </motion.p>
@@ -146,7 +147,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
-          className="mt-2 text-base text-gray-400 md:text-lg"
+          className="mt-2 max-w-xl text-base text-gray-400 md:text-lg"
         >
           {siteConfig.subtitle}
         </motion.p>
@@ -155,7 +156,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.45 }}
-          className="mt-8 h-9 text-lg font-bold text-cyan-400 md:text-xl"
+          className="mt-8 h-9 text-lg font-bold text-amber-200 md:text-xl"
           aria-live="polite"
         >
           {displayText}
@@ -166,7 +167,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center gap-3"
         >
           <MagneticButton onClick={() => scrollToSection("projects")}>
             <HiOutlineCodeBracket className="h-4 w-4" />
@@ -189,6 +190,38 @@ export function Hero() {
             Contact
           </MagneticButton>
         </motion.div>
+        </div>
+
+        <motion.aside
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.45 }}
+          className="hidden justify-self-end border-l border-white/15 pl-6 text-left lg:block lg:max-w-xs"
+        >
+          <p className="font-[family-name:var(--font-orbitron)] text-[10px] uppercase tracking-[0.28em] text-slate-500">
+            Current focus
+          </p>
+          <p className="mt-4 text-2xl font-semibold leading-tight text-white">
+            Systems that make combat feel intentional.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-slate-400">
+            AI, weapons, feedback, and architecture designed as one playable loop.
+          </p>
+          <div className="mt-8 flex gap-6 border-t border-white/10 pt-5">
+            <div>
+              <p className="font-[family-name:var(--font-orbitron)] text-xl text-amber-200">UE5</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500">Engine</p>
+            </div>
+            <div>
+              <p className="font-[family-name:var(--font-orbitron)] text-xl text-amber-200">AI</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500">Systems</p>
+            </div>
+            <div>
+              <p className="font-[family-name:var(--font-orbitron)] text-xl text-amber-200">C++</p>
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-slate-500">Thinking</p>
+            </div>
+          </div>
+        </motion.aside>
       </div>
 
       <ScrollIndicator />

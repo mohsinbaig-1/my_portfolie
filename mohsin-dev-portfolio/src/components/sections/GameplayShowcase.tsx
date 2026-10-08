@@ -54,12 +54,12 @@ function MediaCard({ index, featured = false, onOpen }: MediaCardProps) {
       onClick={() => onOpen(index)}
       whileHover={{ y: -6, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left shadow-xl transition-colors hover:border-cyan-400/30"
+      className="group relative min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-white/5 text-left shadow-xl transition-colors hover:border-cyan-400/30"
       aria-label={`Open ${item.title}`}
     >
       <div
         ref={mediaRef}
-        className={`relative overflow-hidden ${featured ? "aspect-video min-h-[320px]" : "aspect-[4/3]"}`}
+        className={`relative min-w-0 overflow-hidden ${featured ? "aspect-video sm:min-h-[320px]" : "aspect-[4/3]"}`}
       >
         <Image
           src={item.src}
@@ -87,8 +87,8 @@ function MediaCard({ index, featured = false, onOpen }: MediaCardProps) {
         {item.type === "video" && !item.videoUrl && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#050816]/35">
             <div className="rounded-2xl border border-dashed border-cyan-400/40 bg-[#050816]/70 px-4 py-3 text-center text-sm text-gray-200 backdrop-blur-md">
-              <p className="font-semibold text-cyan-300">Video placeholder</p>
-              <p className="mt-1 text-xs text-gray-400">Drop in an MP4 or WebM later by setting the videoUrl field.</p>
+              <p className="font-semibold text-cyan-300">Image preview</p>
+              <p className="mt-1 text-xs text-gray-400">A video capture is not available for this showcase item.</p>
             </div>
           </div>
         )}
@@ -306,13 +306,13 @@ export function GameplayShowcase() {
 
         <AnimatedBorder>
           <div className="space-y-6 p-4 md:p-6">
-            <div className="grid gap-6 xl:grid-cols-2">
+            <div className="grid min-w-0 gap-6 xl:grid-cols-2">
               {featuredIndices.map((index) => (
                 <MediaCard key={showcaseItems[index].id} index={index} featured onOpen={openLightbox} />
               ))}
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid min-w-0 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {galleryIndices.map((index) => (
                 <MediaCard key={showcaseItems[index].id} index={index} onOpen={openLightbox} />
               ))}
